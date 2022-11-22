@@ -1,39 +1,32 @@
 exports = typeof window === 'undefined' ? global : window;
 
 exports.functionsAnswers = {
-  argsAsArray: function(fn, arr) {
+  argsAsArray: (fn, arr) => fn(...arr),
 
-  },
+  // eslint-disable-next-line prefer-reflect
+  speak: (fn, obj) => fn.apply(obj),
 
-  speak: function(fn, obj) {
+  functionFunction: (str) => (strTwo) => `${str}, ${strTwo}`,
 
-  },
+  makeClosures: (arr, fn) => arr.map((elem) => () => fn(elem)),
 
-  functionFunction: function(str) {
+  partial: (fn, str1, str2) => fn.bind(fn, str1, str2),
 
-  },
+  useArguments: (...args) => args.reduce((a, b) => a + b),
 
-  makeClosures: function(arr, fn) {
+  callIt: (fn, ...args) => fn(...args),
 
-  },
+  partialUsingArguments: (fn, ...args) => fn.bind(fn, ...args),
 
-  partial: function(fn, str1, str2) {
+  curryIt: (fn) => {
+    const curried = (args) => {
+      const accumulator = (a) => curried([...args, a]);
 
-  },
-
-  useArguments: function() {
-
-  },
-
-  callIt: function(fn) {
-
-  },
-
-  partialUsingArguments: function(fn) {
-
-  },
-
-  curryIt: function(fn) {
-
+      if (args.length >= fn.length) {
+        return fn(...args);
+      }
+      return accumulator;
+    };
+    return curried([]);
   }
 };

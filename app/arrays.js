@@ -1,59 +1,64 @@
 exports = typeof window === 'undefined' ? global : window;
 
 exports.arraysAnswers = {
-  indexOf: function(arr, item) {
+  indexOf: (arr, item) => arr.indexOf(item),
 
+  sum: (arr) => arr.reduce((a, b) => a + b),
+
+  remove: (arr, item) => arr.filter((elem) => elem !== item),
+
+  removeWithoutCopy: (arr, item) => {
+    for (let i = arr.length - 1; i >= 0; i--) {
+      if (arr[i] === item) {
+        arr.splice(i, 1);
+      }
+    }
+    return arr;
   },
 
-  sum: function(arr) {
-
+  append: (arr, item) => {
+    arr.push(item);
+    return arr;
   },
 
-  remove: function(arr, item) {
-
+  truncate: (arr) => {
+    arr.pop();
+    return arr;
   },
 
-  removeWithoutCopy: function(arr, item) {
-
+  prepend: (arr, item) => {
+    arr.unshift(item);
+    return arr;
   },
 
-  append: function(arr, item) {
-
+  curtail: (arr, item) => {
+    arr.shift(item);
+    return arr;
   },
 
-  truncate: function(arr) {
+  concat: (arr1, arr2) => [...arr1, ...arr2],
 
+  insert: (arr, item, index) => {
+    arr.splice(index, 0, item);
+    return arr;
   },
 
-  prepend: function(arr, item) {
+  count: (arr, item) => arr.filter((elem) => elem === item).length,
 
+  duplicates: (arr) => {
+    const duplicates = arr.filter((item, index) => arr.indexOf(item) !== index);
+    return Array.from(new Set(duplicates));
   },
 
-  curtail: function(arr) {
+  square: (arr) => arr.map((elem) => Math.pow(elem, 2)),
 
-  },
-
-  concat: function(arr1, arr2) {
-
-  },
-
-  insert: function(arr, item, index) {
-
-  },
-
-  count: function(arr, item) {
-
-  },
-
-  duplicates: function(arr) {
-
-  },
-
-  square: function(arr) {
-
-  },
-
-  findAllOccurrences: function(arr, target) {
-
+  findAllOccurrences: (arr, target) => {
+    const arrResult = [];
+    arr.forEach((elem, index) => {
+      if (elem === target) {
+        arrResult.push(index);
+      }
+    });
+    return arrResult;
   }
 };
